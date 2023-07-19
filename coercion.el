@@ -6,10 +6,10 @@
 ;; Maintainer: liuyinz <liuyinz95@gmail.com>
 ;; Version: 0.1.0
 ;; Package-Requires: ((emacs "27.1"))
-;; Keywords: wp, text, editing
+;; Keywords: convenience, editing
 ;; Homepage: https://github.com/liuyinz/emacs-coercion
 
-;; This file is not a part of GNU Emacsl.
+;; This file is not a part of GNU Emacs.
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -58,7 +58,9 @@
               (replace-regexp-in-string
                "\\([[:lower:][:digit:]]\\)\\([[:upper:]]\\)" "\\1 \\2"
                (replace-regexp-in-string
-                "^\\([[:upper:]]\\)\\([[:upper:]][0-9[:lower:]]\\)" "\\1 \\2" string))))
+                "^\\([[:upper:]]\\)\\([[:upper:]][0-9[:lower:]]\\)"
+                "\\1 \\2"
+                string))))
        string)
    (or regexp "[^[:word:]0-9]+") t))
 
@@ -76,20 +78,21 @@
          (begin (car bounds))
          (end (cdr bounds))
          (split (or (and (functionp split) split)
-                    (and (string-or-null-p split) (apply-partially #'coercion--split split))))
+                    (and (string-or-null-p split)
+                         (apply-partially #'coercion--split split))))
          (join (or (and (functionp join) join)
                    (and (listp join) (apply-partially #'coercion--join join))))
          (substrings (funcall split (buffer-substring-no-properties begin end))))
     (if (> (length substrings) 1)
         (replace-region-contents begin end (lambda () (funcall join substrings)))
-      (message "Coercion: spliting string failed!"))))
+      (message "Coercion: splitting string failed!"))))
 
 (defmacro coercion-define (cmd split join)
   "Define coercion command CMD with function SPLIT and JOIN.
 SPLIT must be a function or regexp to split string; nil stands for
 `coercion--split'.  JOIN may be a function or a list of
 \(TRANSFORM1 2 3 .. SEPARATOR).  If it's a function of one argument, must return
- a string concated by a list of substrings.  If it's a list, apply TRANSFORM to
+ a string joined by a list of substrings.  If it's a list, apply TRANSFORM to
  each element of strings, and concat the results according to SEPARATOR."
   `(defun ,cmd ()
      (interactive)
