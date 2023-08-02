@@ -30,6 +30,8 @@
 
 ;;; Code:
 
+(require 'subr-x)
+
 (defgroup coercion nil
   "Naming convention styles switch."
   :group 'coercion
