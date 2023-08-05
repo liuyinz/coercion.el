@@ -31,11 +31,19 @@
 ;;; Code:
 
 (require 'subr-x)
+(require 'cl-lib)
 
 (defgroup coercion nil
   "Naming convention styles switch."
   :group 'coercion
   :prefix "coercion-")
+
+(defcustom coercion-enable-overlays
+  '(yas--active-field-overlay)
+  "Supported overlays before point to transform text.
+Selected according to order."
+  :type '(repeat symbol)
+  :group 'coercion)
 
 (defvar coercion--commands
   '((:cmd coercion-snake-case   :split nil :join '(downcase    "_"))
@@ -72,11 +80,19 @@
                           (setq substrings (mapcar m substrings)))
              (car (last join))))
 
+(defun coercion--bounds ()
+  "Return position (START . END) of string to be handled."
+  (if (use-region-p)
+      (cons (region-beginning) (region-end))
+    (if-let ((ov (car (cl-remove-if-not #'overlay-start
+                                        (mapcar #'symbol-value
+                                                coercion-enable-overlays)))))
+        (cons (overlay-start ov) (overlay-end ov))
+      (bounds-of-thing-at-point 'symbol))))
+
 (defun coercion--change (split join)
   "Replace string selected or at point according to function SPLIT and JOIN."
-  (let* ((bounds (if (use-region-p)
-                     (cons (region-beginning) (region-end))
-                   (bounds-of-thing-at-point 'symbol)))
+  (let* ((bounds (coercion--bounds))
          (begin (car bounds))
          (end (cdr bounds))
          (split (or (and (functionp split) split)
