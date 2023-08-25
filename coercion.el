@@ -31,7 +31,6 @@
 ;;; Code:
 
 (require 'subr-x)
-(require 'cl-lib)
 
 (defgroup coercion nil
   "Naming convention styles switch."
@@ -84,9 +83,9 @@ Selected according to order."
   "Return position (START . END) of string to be handled."
   (if (use-region-p)
       (cons (region-beginning) (region-end))
-    (if-let ((ov (car (cl-remove-if-not #'overlay-start
-                                        (mapcar #'symbol-value
-                                                coercion-enable-overlays)))))
+    (if-let ((ov (car (ignore-errors (seq-filter #'overlay-start
+                                                 (mapcar #'symbol-value
+                                                         coercion-enable-overlays))))))
         (cons (overlay-start ov) (overlay-end ov))
       (bounds-of-thing-at-point 'symbol))))
 
