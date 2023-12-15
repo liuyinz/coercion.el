@@ -11,6 +11,7 @@ Inspired by coercion in abolish.vim, switch naming convention style quickly. Ext
 ## Contents
 
 - [coercion.el](#coercionel)
+  - [Screenshot](#screenshot)
   - [Install](#install)
     - [dependencies](#dependencies)
     - [package](#package)
@@ -18,6 +19,12 @@ Inspired by coercion in abolish.vim, switch naming convention style quickly. Ext
   - [customization](#customization)
 
 <!-- markdown-toc end -->
+
+## Screenshot
+
+- Call `M-x coercion-*` related command
+
+![example](example.gif)
 
 ## Install
 
