@@ -105,7 +105,7 @@ SPLIT must be a function or regexp to split string; nil stands for
 (defun coercion--join-camel-case (strings)
   "Convert a list of STRINGS to camel case string."
   (concat (downcase (car strings))
-          (mapconcat 'capitalize (cdr strings))))
+          (mapconcat #'capitalize (cdr strings))))
 
 ;;;###autoload
 (defun coercion-camel-case ()
