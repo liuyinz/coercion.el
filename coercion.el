@@ -26,8 +26,9 @@
 
 ;;; Commentary:
 
-;; Inspired by coercion in abolish.vim, switch naming convention style quickly.
-;; Extending features by define split and join functions.
+;; Switch naming convention style quickly and extending features by define
+;; split and join rules. Inspired by Vim plugging vim-abolish.
+;; See https://github.com/tpope/vim-abolish#coercion
 
 ;;; Code:
 

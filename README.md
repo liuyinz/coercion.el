@@ -3,8 +3,7 @@
 [![License GPL 3](https://img.shields.io/badge/license-GPL_3-green.svg?style=flat)](LICENSE)
 [![MELPA](https://melpa.org/packages/coercion-badge.svg)](https://melpa.org/#/coercion)
 
-Naming convention style switch.
-Inspired by coercion in abolish.vim, switch naming convention style quickly. Extending features by define split and join functions.
+Switch naming convention style quickly. Inspired by [vim-abolish](https://github.com/tpope/vim-abolish#coercion)
 
 <!-- markdown-toc start -->
 
@@ -17,6 +16,7 @@ Inspired by coercion in abolish.vim, switch naming convention style quickly. Ext
     - [package](#package)
   - [Usage](#usage)
   - [customization](#customization)
+  - [Comparison](#comparison)
 
 <!-- markdown-toc end -->
 
@@ -58,7 +58,7 @@ Clone and add to `load-path`, require the package.
 
 ## customization
 
-Define new command:
+Define new command by providing `split` and `join` rules.
 
 - `coercion--change (&key split join)`
   This function accept two keywords arguments:
@@ -73,7 +73,7 @@ Define new command:
 
 e.g.
 
-``` elisp
+```elisp
 (defun coercion-pascal-case ()
   "Convert to pascal-case style."
   (interactive)
@@ -84,3 +84,9 @@ e.g.
   (interactive)
   (coercion--change :join #'coercion--join-camel-case))
 ```
+
+## Comparison
+
+- [string-inflection](https://github.com/akicho8/string-inflection)
+  - no stand-alone commands, but switch style in pair.
+  - provide cycle commands for major-modes which could be implemented in coercion later
