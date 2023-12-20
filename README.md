@@ -40,11 +40,9 @@ Clone and add to `load-path`, require the package.
 
 - Melpa
 
-**WARNING: not available yet.**
+This package is available on [MELPA].
 
-~~This package is available on [MELPA].~~
-
-~~Install with `M-x package-install` `RET` `coercion` within Emacs.~~
+Install with `M-x package-install` `RET` `coercion` within Emacs.
 
 ## Usage
 
