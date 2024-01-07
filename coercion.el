@@ -1,6 +1,6 @@
 ;;; coercion.el --- Naming convention style switch -*- lexical-binding: t -*-
 
-;; Copyright (C) 2023 liuyinz
+;; Copyright (C) 2023, 2024 liuyinz
 
 ;; Author: liuyinz <liuyinz95@gmail.com>
 ;; Maintainer: liuyinz <liuyinz95@gmail.com>
